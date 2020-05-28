@@ -1,0 +1,64 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # Specify the version you desire here
+      - image: circleci/php:7.3-fpm
+      - image: circleci/mysql:latest
+        command: [--default-authentication-plugin=mysql_native_password]
+        environment:
+          MYSQL_ROOT_PASSWORD: rootPass
+          MYSQL_USER: user # need to be same with "DB_USERNAME" of .env.testing
+          MYSQL_PASSWORD: password # need to be same with "DB_PASSWORD" of .env.testing
+          MYSQL_DATABASE: test_laravel # need to be same with "DB_DATABASE" of .env.testing
+
+    working_directory: ~/laravel-vue-frame/laravel
+
+    steps:
+      - checkout:
+          path: ~/laravel-vue-frame
+      - run: sudo apt-get update -y
+      - run: sudo apt-get install -y libpng-dev libjpeg-dev zip unzip git
+      - run: sudo rm -rf /var/lib/apt/lists/*
+      - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-configure gd --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/
+      - run: sudo docker-php-ext-install pdo pdo_mysql gd mbstring zip
+      - run: sudo composer self-update
+      
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            # "composer.lock" can be used if it is committed to the repo
+            - v1-dependencies-{{ checksum "composer.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: "Install Dependencies"
+          command: composer install -n --prefer-dist
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+
+      # prepare the database
+      - run:
+          name: "Create Environment file and generate app key"
+          command: |
+            mv .env.testing .env
+            php artisan key:generate
+
+      - run:
+          name: "Create database and run migration"
+          command: |
+            php artisan migrate
+
+      # run tests with phpunit
+      - run:
+          name: "Run Tests"
+          command: ./vendor/bin/phpunit
