@@ -23,7 +23,7 @@
 
 - To change database name and user
 1. change under `environment:` in `docker-compose.yml`
-1. change `DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD` in `.env.example`
+1. change `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` in `.env.example`
 
 - To change laravel project folder name
 1. change under `volumes:` in `docker-compose.yml`
@@ -34,16 +34,19 @@
     ``` cd <this project directory> ```  
     ``` docker-compose up -d ```
     
-2. Install php libraries.  
+1. Install php libraries.  
     ``` sh ./scripts/composer_update_install.sh ```
     
-3. Create .env file.  
+1. Create .env file.  
     ``` sh ./scripts/create_env.sh ```
     
-4. Create tables.  
+1. Create tables.  
     ``` sh ./scripts/artisan_migrate_seed.sh ```
-    
-5. Connect `http://localhost:<port>`.
+
+1. Setup Frontend.  
+    ``` sh ./scripts/npm_install_watch.sh ```
+
+1. Connect `http://localhost:<port>`.
 
 ### For Windows
 
@@ -51,16 +54,19 @@
     ``` cd <this project directory> ```  
     ``` docker-compose up -d ```
 
-2. Install php libraries.
+1. Install php libraries.   
     ``` .\scripts\bat\composer_update_install.bat ```
 
-3. Generate key.  
-    ``` .\scripts\bat\artisan_generate_key.bat ``` 
+1. Generate key.  
+    ``` .\scripts\bat\create_env.bat ``` 
 
-4. Create tables.
+1. Create tables.   
     ``` .\scripts\bat\artisan_migrate_seed.bat ``` 
 
-5. Connect `http://localhost:<port>`.
+1. Setup Frontend.  
+    ``` .\scripts\bat\npm_install_watch.bat ```
+
+1. Connect `http://localhost:<port>`.
     
 <br>
 
