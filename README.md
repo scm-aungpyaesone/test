@@ -48,6 +48,19 @@
 
 1. Connect `http://localhost:<port>`.
 
+### Linux Troubleshoot
+1. Permission denied `/var/www/html/`
+    ```
+    The stream or file "/var/www/html/storage/logs/laravel.log" could not be opened: failed to open stream: Permission denied
+    ```
+    * **Steps to solve** 
+        1. ```$ docker exec -it <laravel_container_id> /bin/sh```
+        1. ```$ chown -R www-data:www-data *```
+
+
+
+
+
 ### For Windows
 
 1. Run Docker Containers.  

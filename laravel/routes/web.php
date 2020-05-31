@@ -23,4 +23,4 @@ Route::get('/vue', function () {
 
 Route::get('/vue/{any}', function () {
     return view('vue_index');
-})->where('any', '.*');;
+})->where('any', '.*');
