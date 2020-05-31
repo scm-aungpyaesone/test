@@ -28,6 +28,8 @@
 - To change laravel project folder name
 1. change under `volumes:` in `docker-compose.yml`
 
+## Development Server Setup
+
 ### For Linux
 
 1. Run Docker Containers.  
@@ -58,9 +60,6 @@
         1. ```$ chown -R www-data:www-data *```
 
 
-
-
-
 ### For Windows
 
 1. Run Docker Containers.  
@@ -80,7 +79,53 @@
     ``` .\scripts\bat\npm_install_watch.bat ```
 
 1. Connect `http://localhost:<port>`.
-    
+
+## Testing Server Setup
+
+### For Linux
+1. Connect to database.  
+    ``` sh ./scripts/connect_db_by_root.sh ```
+
+1. Type `<database_root_password>`  
+    (`<database_root_password>` can be checked in `docker-compose.yml` file).  
+
+1. Create database.  
+    ``` 
+    $ CREATE DATABASE <test_database_name>; 
+    ```   
+    (`<test_database_name>` can be checked in `phpunit.xml` file) 
+
+1. Get Permission to Database User.     
+    ``` 
+    $ GRANT ALL PRIVILEGES ON <test_database_name>.* TO '<database_user>'@'%'; 
+    ```    
+    (`<test_database_name>` can be checked in`phpunit.xml` file and for `<database_user>` in`.env` file)
+
+1. Start Testing.   
+    ``` sh ./scripts/artisan_test.sh ```
+
+### For Windows
+1. Connect to database.  
+    ``` .\scripts\bat\connect_db_by_root.bat ```
+
+1. Type `<database_root_password>`.  
+    (`<database_root_password>` can be checked in `docker-compose.yml` file).  
+
+1. Create database.  
+    ``` 
+    $ CREATE DATABASE <test_database_name>; 
+    ```   
+    (`<test_database_name>` can be checked in `phpunit.xml` file) 
+
+1. Get Permission to Database User.     
+    ``` 
+    $ GRANT ALL PRIVILEGES ON <test_database_name>.* TO '<database_user>'@'%'; 
+    ```    
+    (`<test_database_name>` can be checked in`phpunit.xml` file and for `<database_user>` in`.env` file)
+
+1. Start Testing.   
+    ``` .\scripts\bat\artisan_test.bat ```
+
 <br>
 
 ## Tools

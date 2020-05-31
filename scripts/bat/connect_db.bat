@@ -1,2 +1,2 @@
-## Connect db container.
+:: Connect db container.
 docker-compose exec mysql mysql -u user -p
