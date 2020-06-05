@@ -1,5 +1,5 @@
 ## npm install
-docker-compose exec php-fpm npm install
+docker-compose run --rm nodeJs npm install
 
 ## npm watch for changes
-docker-compose exec php-fpm npm run watch
+docker-compose run --rm nodeJs npm run watch

@@ -10,6 +10,7 @@ services:
       - ./laravel:/var/www/html # To change project folder name
     depends_on:
       - php-fpm
+      - nodeJs
 
   php-fpm:
     build:
@@ -20,6 +21,12 @@ services:
       - ./laravel:/var/www/html # To change project folder name
     depends_on:
       - mysql
+
+  nodeJs:
+    image: node:14.3.0-alpine3.10
+    working_dir: /var/www/html
+    volumes:
+      - ./laravel:/var/www/html
 
   mysql:
     image: mysql:latest

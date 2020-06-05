@@ -1,7 +1,7 @@
 FROM php:7.3-fpm-alpine AS base
 
 ## add necessary packages.
-RUN apk --update add nodejs npm \
+RUN apk --update add \
     && apk add git zlib-dev libzip-dev \
     && docker-php-ext-install pdo_mysql zip
 
