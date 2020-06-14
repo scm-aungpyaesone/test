@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('items', 'Item\ItemController@getItemTree')->name('getItemTree');
+
+Route::post('postSelectedItems', 'Item\ItemController@postSelectedItems')->name('postSelectedItems');
+
 Route::group([
     'prefix' => 'auth'
 ], function () {
