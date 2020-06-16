@@ -17,27 +17,27 @@ class ItemSeeder extends Seeder
                 [
                     'id' => 1,
                     'title' => 'PC',
-                    'error_message' => 'PC is required.',
                     'need_children_count' => 1,
+                    'error_message' => 'There is no selected item for PC.',
                 ]
             ),
             new Item(
                 [
                     'id' => 2,
                     'title' => 'Mouse',
-                    'error_message' => 'Mouse is required.',
                     'need_children_count' => 1,
+                    'error_message' => 'There is no selected item for Mouse.',
                 ]
             ),
         ];
         foreach ($roots as $root) {
             $root->save();
         }
-        $children = [
+        $childrenForPC = [
             new Item(
                 [
-                    'id' => 3,
-                    'title' => 'PC Brand',
+                    'id' => 1001,
+                    'title' => 'Brand',
                     'parent_id' => 1,
                     'error_message' => 'PC Brand is required.',
                     'need_children_count' => 1,
@@ -45,175 +45,227 @@ class ItemSeeder extends Seeder
             ),
             new Item(
                 [
-                    'id' => 4,
-                    'title' => 'Dell PC',
+                    'id' => 1002,
+                    'title' => 'HP Laptop',
+                    'parent_id' => 1001,
+                    'error_message' => 'There is no selected item for Processor and RAM.',
                     'need_children_count' => 2,
-                    'parent_id' => 3,
-                    'error_message' => 'PC Specifications are required.'
+                    'price' => 550000,
                 ]
             ),
             new Item(
                 [
-                    'id' => 5,
-                    'title' => 'PC RAM',
-                    'parent_id' => 4,
-                    'error_message' => 'PC RAM is required.',
-                    'need_children_count' => 1,
+                    'id' => 1003,
+                    'title' => 'Dell Laptop',
+                    'parent_id' => 1001,
+                    'error_message' => 'There is no selected item for Processor and RAM.',
+                    'need_children_count' => 2,
+                    'price' => 500000,
                 ]
             ),
             new Item(
                 [
-                    'id' => 6,
-                    'title' => 'PC Processor',
-                    'parent_id' => 4,
+                    'id' => 1004,
+                    'title' => 'Processor',
+                    'parent_id' => 1002,
                     'error_message' => 'PC Processor is required.',
                     'need_children_count' => 1,
                 ]
             ),
             new Item(
                 [
-                    'id' => 7,
-                    'title' => '4GB',
-                    'parent_id' => 5,
-                    'error_message' => 'PC RAM is required.'
-                ]
-            ),
-            new Item(
-                [
-                    'id' => 8,
-                    'title' => '8GB',
-                    'parent_id' => 5,
-                    'error_message' => 'PC RAM is required.'
-                ]
-            ),
-            new Item(
-                [
-                    'id' => 9,
-                    'title' => 'i5',
-                    'parent_id' => 6,
-                    'error_message' => 'PC Processor is required.'
-                ]
-            ),
-            new Item(
-                [
-                    'id' => 10,
-                    'title' => 'i7',
-                    'parent_id' => 6,
-                    'error_message' => 'PC Processor is required.'
-                ]
-            ),
-            new Item(
-                [
-                    'id' => 11,
-                    'title' => 'HP PC',
-                    'need_children_count' => 2,
-                    'parent_id' => 3,
-                    'error_message' => 'PC Specifications are required.'
-                ]
-            ),
-            new Item(
-                [
-                    'id' => 12,
-                    'title' => 'PC RAM',
-                    'parent_id' => 11,
+                    'id' => 1005,
+                    'title' => 'RAM',
+                    'parent_id' => 1002,
                     'error_message' => 'PC RAM is required.',
                     'need_children_count' => 1,
                 ]
             ),
             new Item(
                 [
-                    'id' => 13,
-                    'title' => 'PC Processor',
-                    'parent_id' => 11,
+                    'id' => 1006,
+                    'title' => 'Processor',
+                    'parent_id' => 1003,
                     'error_message' => 'PC Processor is required.',
                     'need_children_count' => 1,
                 ]
             ),
             new Item(
                 [
-                    'id' => 14,
-                    'title' => '4GB',
-                    'parent_id' => 12,
-                    'error_message' => 'PC RAM is required.'
+                    'id' => 1007,
+                    'title' => 'RAM',
+                    'parent_id' => 1003,
+                    'error_message' => 'PC RAM is required.',
+                    'need_children_count' => 1,
                 ]
             ),
             new Item(
                 [
-                    'id' => 15,
-                    'title' => '8GB',
-                    'parent_id' => 12,
-                    'error_message' => 'PC RAM is required.'
+                    'id' => 1008,
+                    'title' => 'i3',
+                    'parent_id' => 1004,
+                    'error_message' => 'PC Processor is required.',
+                    'need_children_count' => 0,
+                    'price' => 150000,
                 ]
             ),
             new Item(
                 [
-                    'id' => 16,
+                    'id' => 1009,
                     'title' => 'i5',
-                    'parent_id' => 13,
-                    'error_message' => 'PC Processor is required.'
+                    'parent_id' => 1004,
+                    'error_message' => 'PC Processor is required.',
+                    'need_children_count' => 0,
+                    'price' => 200000,
                 ]
             ),
             new Item(
                 [
-                    'id' => 17,
+                    'id' => 1010,
                     'title' => 'i7',
-                    'parent_id' => 13,
-                    'error_message' => 'PC Processor is required.'
+                    'parent_id' => 1004,
+                    'error_message' => 'PC Processor is required.',
+                    'need_children_count' => 0,
+                    'price' => 250000,
                 ]
             ),
             new Item(
                 [
-                    'id' => 18,
-                    'title' => 'Gaming Mouse',
+                    'id' => 1011,
+                    'title' => '8GB',
+                    'parent_id' => 1005,
+                    'error_message' => 'PC RAM is required.',
+                    'need_children_count' => 0,
+                    'price' => 100000,
+                ]
+            ),
+            new Item(
+                [
+                    'id' => 1012,
+                    'title' => '4GB',
+                    'parent_id' => 1005,
+                    'error_message' => 'PC RAM is required.',
+                    'need_children_count' => 0,
+                    'price' => 50000,
+                ]
+            ),
+            new Item(
+                [
+                    'id' => 1013,
+                    'title' => 'i5',
+                    'parent_id' => 1006,
+                    'error_message' => 'PC Processor is required.',
+                    'need_children_count' => 0,
+                    'price' => 150000,
+                ]
+            ),
+            new Item(
+                [
+                    'id' => 1014,
+                    'title' => 'i7',
+                    'parent_id' => 1006,
+                    'error_message' => 'PC Processor is required.',
+                    'need_children_count' => 0,
+                    'price' => 200000,
+                ]
+            ),
+            new Item(
+                [
+                    'id' => 1015,
+                    'title' => '8GB',
+                    'parent_id' => 1007,
+                    'error_message' => 'PC RAM is required.',
+                    'need_children_count' => 0,
+                    'price' => 100000,
+                ]
+            ),
+            new Item(
+                [
+                    'id' => 1016,
+                    'title' => '16GB',
+                    'parent_id' => 1007,
+                    'error_message' => 'PC RAM is required.',
+                    'need_children_count' => 0,
+                    'price' => 200000,
+                ]
+            )
+        ];
+        foreach ($childrenForPC as $childForPC) {
+            $childForPC->save();
+        }
+
+        $childrenForMouse = [
+            new Item(
+                [
+                    'id' => 2001,
+                    'title' => 'Brand',
                     'parent_id' => 2,
-                    'error_message' => 'Mouse Type is required.',
                     'need_children_count' => 1,
+                    'error_message' => 'Mouse Brand is required.',
                 ]
             ),
             new Item(
                 [
-                    'id' => 19,
-                    'title' => 'Normal Mouse',
-                    'parent_id' => 2,
-                    'error_message' => 'Mouse Type is required.',
+                    'id' => 2002,
+                    'title' => 'HP Mouse',
+                    'parent_id' => 2001,
                     'need_children_count' => 1,
+                    'error_message' => 'Mouse Brand is required.',
+                    'price' => 7000,
                 ]
             ),
             new Item(
                 [
-                    'id' => 20,
+                    'id' => 2003,
+                    'title' => 'Dell Mouse',
+                    'parent_id' => 2001,
+                    'need_children_count' => 1,
+                    'error_message' => 'Mouse Brand is required.',
+                    'price' => 5000,
+                ]
+            ),
+            new Item(
+                [
+                    'id' => 2004,
+                    'title' => 'Standard',
+                    'parent_id' => 2002,
+                    'need_children_count' => 0,
+                    'error_message' => 'Mouse Type is required.',
+                    'price' => 1000,
+                ]
+            ),
+            new Item(
+                [
+                    'id' => 2005,
                     'title' => 'Bluetooth',
-                    'parent_id' => 18,
-                    'error_message' => 'Gaming Mouse Type is required.'
+                    'parent_id' => 2002,
+                    'need_children_count' => 0,
+                    'error_message' => 'Mouse Type is required.',
+                    'price' => 5000,
+                ]
+            ), new Item(
+                [
+                    'id' => 2006,
+                    'title' => 'Standard',
+                    'parent_id' => 2003,
+                    'need_children_count' => 0,
+                    'error_message' => 'Mouse Type is required.',
+                    'price' => 1000,
                 ]
             ),
             new Item(
                 [
-                    'id' => 21,
-                    'title' => 'Normal',
-                    'parent_id' => 18,
-                    'error_message' => 'Gaming Mouse Type is required.'
-                ]
-            ),
-            new Item(
-                [
-                    'id' => 22,
+                    'id' => 2007,
                     'title' => 'Bluetooth',
-                    'parent_id' => 19,
-                    'error_message' => 'Normal Mouse Type is required.'
-                ]
-            ),
-            new Item(
-                [
-                    'id' => 23,
-                    'title' => 'Normal',
-                    'parent_id' => 19,
-                    'error_message' => 'Normal Mouse Type is required.'
+                    'parent_id' => 2003,
+                    'need_children_count' => 0,
+                    'error_message' => 'Mouse Type is required.',
+                    'price' => 5000,
                 ]
             ),
         ];
-        foreach ($children as $child) {
-            $child->save();
+        foreach ($childrenForMouse as $childForMouse) {
+            $childForMouse->save();
         }
     }
 }

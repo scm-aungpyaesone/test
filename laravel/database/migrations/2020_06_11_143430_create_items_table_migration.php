@@ -19,7 +19,9 @@ class CreateItemsTableMigration extends Migration
                 ->on('items')
                 ->onDelete('set null');
             $table->string('title', 255);
-            $table->string('error_message', 255);
+            $table->integer('price')->default(0);
+            $table->string('error_message', 255)->nullable();
+            $table->string('images', 255)->nullable();
             $table->integer('need_children_count')->default(0);
         });
 

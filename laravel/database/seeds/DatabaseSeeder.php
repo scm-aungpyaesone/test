@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         factory(App\Models\User::class, 1)->create();
         $this->call(ItemSeeder::class);
+        $this->call(ItemConstraintSeeder::class);
     }
 }
