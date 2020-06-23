@@ -1,5 +1,5 @@
 ## npm install
-docker-compose run --rm nodeJs npm install
+docker-compose run --rm nodeJs yarn install
 
 ## npm watch for changes
-docker-compose run --rm nodeJs npm run watch
+docker-compose run --rm nodeJs yarn run watch

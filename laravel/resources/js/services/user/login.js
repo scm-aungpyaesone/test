@@ -1,9 +1,18 @@
 export default {
     data: () => ({
         valid: true,
+        user: {
+            email: "",
+            password: "",
+        },
         email: "",
         password: "",
         error: "",
+        errors: {
+            email: "",
+            password: "",
+            others: ""
+        },
 
         // validation rules for user email.
         emailRules: [
@@ -32,6 +41,28 @@ export default {
                 .catch(err => {
                     this.error = err.response.data.errors.message;
                     console.log(err);
+                });
+        },
+        onSubmit() {
+            this.$store
+                .dispatch("login", {
+                    email: this.user.email,
+                    password: this.user.password
+                })
+                .then(() => {
+                    this.error = "";
+                    this.$router.push({ name: "home" });
+                })
+                .catch(err => {
+                    err.response.data.errors.email ?
+                        this.errors.email = err.response.data.errors.email[0] :
+                        this.errors.email = '';
+                    err.response.data.errors.password ?
+                        this.errors.password = err.response.data.errors.password[0] :
+                        this.errors.password = '';
+                    err.response.data.errors.others ?
+                        this.errors.others = err.response.data.errors.others[0] :
+                        this.errors.others = '';
                 });
         }
     }

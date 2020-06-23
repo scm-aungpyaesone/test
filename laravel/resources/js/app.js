@@ -1,4 +1,6 @@
 import "./bootstrap";
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vue from "vue";
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
@@ -8,7 +10,9 @@ import store from "./store/index";
 import axios from "axios";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
 import moment from "moment";
+import { BootstrapVue } from 'bootstrap-vue';
 
+Vue.use(BootstrapVue);
 Vue.use(Vuetify);
 // Set Vue globally
 window.Vue = Vue;
@@ -33,7 +37,7 @@ const app = new Vue({
      */
     created() {
         axios.interceptors.request.use(
-            function(config) {
+            function (config) {
                 if (store.state.user) {
                     const tokenType = store.state.user.data.token_type;
                     const token = store.state.user.data.access_token;
@@ -42,7 +46,7 @@ const app = new Vue({
                 }
                 return config;
             },
-            function(error) {
+            function (error) {
                 return Promise.reject(error);
             }
         );
