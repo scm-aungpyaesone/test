@@ -61,4 +61,6 @@ jobs:
       # run tests with phpunit
       - run:
           name: "Run Tests"
-          command: ./vendor/bin/phpunit
+          command: |
+            php artisan config:cache
+            ./vendor/bin/phpunit
