@@ -1,5 +1,5 @@
 :: npm install
-docker-compose run --rm nodeJs yarn install
+docker-compose exec php-fpm yarn install
 
 :: npm watch for changes
-docker-compose run --rm nodeJs yarn run watch
+docker-compose exec php-fpm yarn watch

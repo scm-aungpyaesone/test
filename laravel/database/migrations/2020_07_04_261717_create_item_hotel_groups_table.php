@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSelectedItemsTable extends Migration
+class CreateItemHotelGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,17 @@ class CreateSelectedItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('selected_items', function (Blueprint $table) {
+        Schema::create('item_hotel_groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('plan_id')->unsigned();
-            $table->foreign('plan_id')
-                ->references('id')
-                ->on('plans')
-                ->onDelete('cascade');
             $table->integer('item_id')->unsigned();
-            $table->foreign('item_id')
-                ->references('id')
-                ->on('items')
+            $table->integer('hotel_id')->unsigned();
+            $table->foreign('item_id')->references('id')->on('items')
                 ->onDelete('cascade');
-            $table->integer('item_value')->nullable();
+            $table->foreign('hotel_id')->references('id')->on('hotels')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -37,6 +31,6 @@ class CreateSelectedItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('selected_items');
+        Schema::dropIfExists('item_hotel_groups');
     }
 }

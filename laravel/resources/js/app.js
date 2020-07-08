@@ -2,32 +2,22 @@ import "./bootstrap";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vue from "vue";
-import Vuetify from "vuetify";
-import "vuetify/dist/vuetify.min.css";
 import Layout from "./components/Layout";
 import router from "./routes/routes";
 import store from "./store/index";
 import axios from "axios";
-import "material-design-icons-iconfont/dist/material-design-icons.css";
 import moment from "moment";
 import { BootstrapVue } from 'bootstrap-vue';
 
 Vue.use(BootstrapVue);
-Vue.use(Vuetify);
 // Set Vue globally
 window.Vue = Vue;
 
-const vuetifyOptions = {
-    icons: {
-        iconfont: "md"
-    }
-};
 Vue.prototype.moment = moment;
 Vue.prototype.$axios = axios;
 // Load Index
 Vue.component("app-layout", Layout);
 const app = new Vue({
-    vuetify: new Vuetify(vuetifyOptions),
     el: "#app",
     router,
     store,

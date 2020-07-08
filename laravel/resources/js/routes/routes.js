@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 import Login from "../pages/user/Login";
 import Home from "../pages/home/Home";
+import Place from "../pages/planning/Place";
 import store from "../store/index";
 
 Vue.use(VueRouter);
@@ -11,46 +12,52 @@ Vue.use(VueRouter);
  * This is router setup for frontend side.
  */
 const routes = [
-    {
-        path: "/vue/login",
-        name: "login",
-        component: Login
-    }, ,
-    {
-        path: "/vue/home",
-        name: "home",
-        component: Home,
-        meta: {
-            authorize: []
-        }
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  ,
+  {
+    path: "/home",
+    name: "home",
+    component: Home,
+    meta: {
+      authorize: [],
     },
-    {
-        path: "/vue/*",
-        redirect: "/vue/home"
-    },
-    ,
-    {
-        path: "/vue",
-        redirect: "/vue/home"
-    }
-]
+  },
+  {
+    path: "/planning/place",
+    name: "place",
+    component: Place,
+  },
+  {
+    path: "/*",
+    redirect: "/home",
+  },
+  ,
+  {
+    path: "",
+    redirect: "/home",
+  },
+];
 
 const router = new VueRouter({
-    mode: "history",
-    routes
+  mode: "history",
+  routes,
 });
 
 /**
  * This is to handle and check authentication for routing.
  */
 router.beforeEach((to, from, next) => {
-    const loggedIn = store.getters.isLoggedIn;
-    if (!loggedIn && to.name != "login") {
-        return next("/vue/login");
-    } else if (loggedIn && to.name == "login") {
-        return next("/vue/home");
-    }
-    next();
+  const loggedIn = store.getters.isLoggedIn;
+  if (!loggedIn && to.name != "login") {
+    return next("/login");
+  } else if (loggedIn && to.name == "login") {
+    return next("/home");
+  }
+  next();
 });
 
 export default router;

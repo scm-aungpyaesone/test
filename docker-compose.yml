@@ -1,5 +1,6 @@
 version: "3.7"
-
+networks:
+  laravel:
 services:
   nginx:
     image: nginx:latest
@@ -10,7 +11,8 @@ services:
       - ./laravel:/var/www/html # To change project folder name
     depends_on:
       - php-fpm
-      - nodeJs
+    networks:
+      - laravel
 
   php-fpm:
     build:
@@ -21,12 +23,8 @@ services:
       - ./laravel:/var/www/html # To change project folder name
     depends_on:
       - mysql
-
-  nodeJs:
-    image: node:14.3.0-alpine3.10
-    working_dir: /var/www/html
-    volumes:
-      - ./laravel:/var/www/html
+    networks:
+      - laravel
 
   mysql:
     image: mysql:latest
@@ -35,11 +33,13 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootPass
       MYSQL_USER: user # To change database user
-      MYSQL_PASSWORD: password  # To change database user password
-      MYSQL_DATABASE: laravel  # To change database name
+      MYSQL_PASSWORD: password # To change database user password
+      MYSQL_DATABASE: laravel # To change database name
     volumes:
       - ./mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf
       - db-data:/var/lib/mysql
+    networks:
+      - laravel
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -53,6 +53,8 @@ services:
     restart: always
     ports:
       - 8183:80
+    networks:
+      - laravel
 
 volumes:
   db-data:

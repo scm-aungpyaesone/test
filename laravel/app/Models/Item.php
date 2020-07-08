@@ -18,4 +18,12 @@ class Item extends Entity
      * @var \App\ItemClosure
      */
     protected $closure = 'App\Models\ItemClosure';
+
+    /**
+     * The hotels that belong to the item.
+     */
+    public function hotels()
+    {
+        return $this->belongsToMany(Hotel::class, 'item_hotel_groups');
+    }
 }
