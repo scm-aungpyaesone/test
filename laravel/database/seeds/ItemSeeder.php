@@ -16,27 +16,27 @@ class ItemSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('item_closure')->truncate();
         DB::table('items')->truncate();
-        $items = array_map('str_getcsv', file(storage_path('/data/csv/items.csv')));
-        foreach ($items as $index => $row) {
-            $itemValues = [
-                'id' => $row[0]
-            ];
-            if ($row[1]) {
-                $itemValues['parent_id'] = $row[1];
+        $itemCSVData = array_map('str_getcsv', file(storage_path('/data/csv/items.csv')));
+        $itemDataWithoutCSV = array_slice($itemCSVData, 1);
+        $itemHeaderList = $itemCSVData[0];
+        foreach ($itemDataWithoutCSV as $row) {
+            $draftItem = [];
+            foreach ($itemHeaderList as $index => $header) {
+                if (!empty(trim($row[$index]))) {
+                    if (trim($header) == 'images' || trim($header) == 'validation_rules') {
+                        $imagePathList = explode("|", trim($row[$index]));
+                        $imageObj = [];
+                        foreach ($imagePathList as $imagePath) {
+                            $imageKeyValuePair = explode(":", $imagePath);
+                            $imageObj[trim($imageKeyValuePair[0])] = trim($imageKeyValuePair[1]);
+                        }
+                        $draftItem[$header] = $imageObj;
+                    } else {
+                        $draftItem[$header] = trim($row[$index]);
+                    }
+                }
             }
-            if ($row[2]) {
-                $itemValues['title'] = $row[2];
-            }
-            if ($row[3]) {
-                $itemValues['price'] = $row[3];
-            }
-            if ($row[4]) {
-                $itemValues['images'] = $row[4];
-            }
-            if ($row[5]) {
-                $itemValues['need_children_count'] = $row[5];
-            }
-            $item = new Item($itemValues);
+            $item = new Item($draftItem);
             $item->save();
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

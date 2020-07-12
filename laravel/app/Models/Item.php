@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Franzose\ClosureTable\Models\Entity;
@@ -11,6 +12,10 @@ class Item extends Entity
      * @var string
      */
     protected $table = 'items';
+    protected $casts = [
+        'images' => 'array',
+        'validation_rules' => 'array'
+    ];
 
     /**
      * ClosureTable model instance.

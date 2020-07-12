@@ -19,9 +19,12 @@ class CreateItemsTableMigration extends Migration
                 ->on('items')
                 ->onDelete('set null');
             $table->string('title', 255);
+            $table->string('comment', 1000)->nullable();
             $table->integer('price')->default(0);
-            $table->string('images', 255)->nullable();
+            $table->json('images')->nullable()->default(null);
             $table->integer('need_children_count')->default(0);
+            $table->boolean('is_customizable')->default(false);
+            $table->json('validation_rules')->nullable()->default(null);
         });
 
         Schema::create('item_closure', function (Blueprint $table) {

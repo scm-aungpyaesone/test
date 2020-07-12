@@ -11,11 +11,12 @@ axios.defaults.baseURL = constants.API_BASE_URL;
 export default new Vuex.Store({
   state: {
     user: null,
+    selectedItemList: null,
   },
   mutations: {
     setUserData(state, userData) {
       state.user = userData;
-    },
+    }
   },
   actions: {
     /**

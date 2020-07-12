@@ -3,7 +3,8 @@ FROM php:7.3-fpm-alpine AS base
 ## add necessary packages.
 RUN apk --update add \
     && apk add git zlib-dev libzip-dev \
-    && docker-php-ext-install pdo_mysql zip
+    && docker-php-ext-install pdo_mysql zip \
+    && apk add yarn nodejs npm
 
 ## Install composer.
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
