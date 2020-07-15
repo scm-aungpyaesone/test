@@ -82,6 +82,12 @@
 
 ## Testing Server Setup
 
+### With swagger and dredd
+1. Make start docker up
+
+1. Run the following to start swagger testing     
+    ``` docker run -it -v $PWD/swagger:/swagger -w /swagger --network host apiaryio/dredd dredd api.yml 127.0.0.1:8000 -d ```
+
 ### For Linux
 1. Connect to database.  
     ``` sh ./scripts/connect_db_by_root.sh ```

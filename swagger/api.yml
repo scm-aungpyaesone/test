@@ -1,0 +1,47 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Swagger Test
+servers:
+  - url: localhost:8000
+paths:
+  /api/auth/login:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestBody"
+      responses:
+        "200":
+          description: Login success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+components:
+  schemas:
+    RequestBody:
+      type: object
+      required:
+        - password
+        - email
+      properties:
+        email:
+          type: string
+          example: "admin@laravel.com"
+        password:
+          type: string
+          example: "password"
+    SuccessResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            access_token:
+              type: string
+            token_type:
+              type: string
+            expires_at:
+              type: string
