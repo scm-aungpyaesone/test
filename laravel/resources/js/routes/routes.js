@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Login from "../pages/user/Login";
 import Home from "../pages/home/Home";
 import Place from "../pages/planning/Place";
+import Car from "../pages/planning/Car";
 import store from "../store/index";
 
 Vue.use(VueRouter);
@@ -30,6 +31,11 @@ const routes = [
     path: "/planning/place",
     name: "place",
     component: Place,
+  },
+  {
+    path: "/planning/car",
+    name: "car",
+    component: Car,
   },
   {
     path: "/*",

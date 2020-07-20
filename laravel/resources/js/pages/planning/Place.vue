@@ -4,8 +4,8 @@
       <div class="col-md-7 my-2">
         <img
           class="w-100"
-          v-if="places.length"
-          :src="getSrc(places[placeIdList.indexOf(selectedPaceItemList.placeId)].images.right)"
+          v-if="placeImage"
+          :src="getSrc(placeImage)"
         />
       </div>
       <div class="col-md-5 my-2 place-option">

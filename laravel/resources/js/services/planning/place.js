@@ -1,5 +1,3 @@
-import Axios from "axios";
-
 export default {
   data() {
     return {
@@ -16,6 +14,8 @@ export default {
         placeCustom: {},
       },
       placeIdList: [],
+      draftTotalPrice: 0,
+      placeImage: "",
     };
   },
   async beforeRouteEnter(to, from, next) {
@@ -57,6 +57,8 @@ export default {
       // selected initial place items
       this.selectedPaceItemList.placeId = this.places[0].id;
       this.selectedPaceItemList.placeTitleId = this.places[0].parent_id;
+      this.placeImage = this.places[0].images.right;
+      this.draftTotalPrice += this.places[0].price;
       this.placeIdList = this.places.map((place) => place.id);
       this.setPlanDetail(
         this.placeIdList.indexOf(this.selectedPaceItemList.placeId)
@@ -73,6 +75,7 @@ export default {
         }
         this.selectedPaceItemList.placeDetail[element.id] =
           element.children[0].id;
+          this.draftTotalPrice += element.children[0].price;
       });
       console.log(this.selectedPaceItemList);
     },
@@ -82,6 +85,7 @@ export default {
      */
     selectPlace(place) {
       this.selectedPaceItemList.placeTitleId = place.parent_id;
+      this.placeImage = place.images.right;
       this.selectedPaceItemList.placeDetail = {};
       this.setPlanDetail(
         this.placeIdList.indexOf(this.selectedPaceItemList.placeId)
