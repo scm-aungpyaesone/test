@@ -1,4 +1,4 @@
-## Tech
+## Techs
 
 * **Docker**  
   * **Compose File**  
